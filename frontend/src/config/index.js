@@ -1,6 +1,2 @@
-// Centralized environment configuration
-
-export const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
-
-export const SOCKET_URL = API_URL; // same backend
+export const API_URL = "https://live-bidding-system.onrender.com";
+export const SOCKET_URL = API_URL;
