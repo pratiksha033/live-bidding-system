@@ -135,3 +135,9 @@ button:hover {
   padding-top: 30px;
   color: white;
 }
+
+.live {
+  color: #4ade80;
+  font-weight: 600;
+}
+

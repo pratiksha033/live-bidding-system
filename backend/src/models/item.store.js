@@ -1,4 +1,5 @@
-const now = Date.now();
+// Very far future date (year 2099)
+const NEVER_EXPIRE = new Date("2099-01-01").getTime();
 
 module.exports = [
   {
@@ -7,7 +8,7 @@ module.exports = [
     startingPrice: 500,
     currentBid: 500,
     highestBidder: null,
-    endTime: now + 10 * 60 * 1000,
+    endTime: NEVER_EXPIRE,
   },
   {
     id: "2",
@@ -15,7 +16,7 @@ module.exports = [
     startingPrice: 900,
     currentBid: 900,
     highestBidder: null,
-    endTime: now + 8 * 60 * 1000,
+    endTime: NEVER_EXPIRE,
   },
   {
     id: "3",
@@ -23,6 +24,6 @@ module.exports = [
     startingPrice: 600,
     currentBid: 600,
     highestBidder: null,
-    endTime: now + 6 * 60 * 1000,
+    endTime: NEVER_EXPIRE,
   },
 ];
