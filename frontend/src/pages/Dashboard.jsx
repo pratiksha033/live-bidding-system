@@ -6,13 +6,20 @@ import useSocket from "../hooks/useSocket";
 export default function Dashboard() {
   const [items, setItems] = useState([]);
 
-  // ✅ simple fetch (no env, no config, no offset)
   useEffect(() => {
+    console.log("FETCHING ITEMS...");
+  
     axios
       .get("https://live-bidding-system.onrender.com/items")
-      .then(res => setItems(res.data))
-      .catch(console.error);
+      .then(res => {
+        console.log("DATA:", res.data);
+        setItems(res.data);
+      })
+      .catch(err => {
+        console.error("ERROR:", err);
+      });
   }, []);
+  
 
   // ✅ realtime updates
   useSocket("UPDATE_BID", (updatedItem) => {
