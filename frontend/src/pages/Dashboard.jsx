@@ -9,7 +9,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const API =
-      import.meta.env.VITE_API_URL || "http://localhost:5000";
+    "https://live-bidding-system.onrender.com" || "http://localhost:5000";
   
     axios
       .get(`${API}/items`)
