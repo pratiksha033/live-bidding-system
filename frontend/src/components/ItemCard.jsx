@@ -57,7 +57,7 @@ export default function ItemCard({ item }) {
 
       <h2>${item.currentBid}</h2>
 
-      <CountdownTimer endTime={item.endTime} />
+      <CountdownTimer endTime={item.endTime} offset={offset} />
 
       <button onClick={placeBid}>Bid +$10</button>
     </div>

@@ -5,19 +5,24 @@ import useSocket from "../hooks/useSocket";
 
 export default function Dashboard() {
   const [items, setItems] = useState([]);
-
+  const [offset, setOffset] = useState(0); // ⭐ NEW
 
   useEffect(() => {
-    const API =
-    "https://live-bidding-system.onrender.com" || "http://localhost:5000";
-  
+    const API = "https://live-bidding-system.onrender.com";
+
     axios
       .get(`${API}/items`)
-      .then(res => setItems(res.data))
+      .then(res => {
+        const { serverTime, items } = res.data;
+
+        // ⭐ calculate server time sync offset
+        const serverOffset = serverTime - Date.now();
+
+        setOffset(serverOffset);
+        setItems(items);
+      })
       .catch(console.error);
   }, []);
-  
-
 
   useSocket("UPDATE_BID", (updatedItem) => {
     setItems(prev =>
@@ -27,14 +32,17 @@ export default function Dashboard() {
 
   return (
     <>
-  <h1 className="title">🔥 Live Auctions</h1>
+      <h1 className="title">🔥 Live Auctions</h1>
 
-  <div className="grid">
-    {items.map(item => (
-      <ItemCard key={item.id} item={item} />
-    ))}
-  </div>
-</>
-
+      <div className="grid">
+        {items.map(item => (
+          <ItemCard
+            key={item.id}
+            item={item}
+            offset={offset}   // ⭐ pass to card
+          />
+        ))}
+      </div>
+    </>
   );
 }
