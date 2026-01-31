@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-const URL =
-  import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Direct backend URL (Render)
+const URL = "https://live-bidding-system.onrender.com";
 
-export const socket = io(URL);
+export const socket = io(URL, {
+  transports: ["websocket"], // faster + avoids polling issues on Render
+});
