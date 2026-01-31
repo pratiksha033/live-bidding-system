@@ -8,10 +8,15 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    axios.get("http://localhost:5000/items").then(res => {
-      setItems(res.data);
-    });
+    const API =
+      import.meta.env.VITE_API_URL || "http://localhost:5000";
+  
+    axios
+      .get(`${API}/items`)
+      .then(res => setItems(res.data))
+      .catch(console.error);
   }, []);
+  
 
 
   useSocket("UPDATE_BID", (updatedItem) => {
