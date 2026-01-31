@@ -8,21 +8,20 @@ export default function Dashboard() {
   const [offset, setOffset] = useState(0); // ⭐ NEW
 
   useEffect(() => {
-    const API = "https://live-bidding-system.onrender.com";
-
+    const API = import.meta.env.VITE_API_URL;
+  
     axios
       .get(`${API}/items`)
       .then(res => {
-        const { serverTime, items } = res.data;
-
-        // ⭐ calculate server time sync offset
-        const serverOffset = serverTime - Date.now();
-
-        setOffset(serverOffset);
-        setItems(items);
+        const data = Array.isArray(res.data)
+          ? res.data
+          : res.data.items;
+  
+        setItems(data);
       })
       .catch(console.error);
   }, []);
+  
 
   useSocket("UPDATE_BID", (updatedItem) => {
     setItems(prev =>
