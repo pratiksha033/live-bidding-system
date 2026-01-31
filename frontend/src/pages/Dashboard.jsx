@@ -9,10 +9,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/items`)
+      .get("https://live-bidding-system.onrender.com/items")
       .then(res => setItems(res.data))
       .catch(console.error);
   }, []);
+  
 
   useSocket("UPDATE_BID", (updatedItem) => {
     setItems(prev =>
