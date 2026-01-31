@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
 
-export default function CountdownTimer({ endTime, offset }) {
-  const [time, setTime] = useState(endTime - (Date.now() + offset));
+export default function CountdownTimer({ endTime }) {
+  const [time, setTime] = useState(endTime - Date.now());
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const serverNow = Date.now() + offset; // ⭐ server-synced time
-      setTime(endTime - serverNow);
+      setTime(endTime - Date.now());
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [endTime, offset]);
+  }, [endTime]);
 
-  // your existing logic kept exactly
   const ONE_DAY = 24 * 60 * 60 * 1000;
+
+  // show Live for never-expire items
   if (time > ONE_DAY) return <p className="timer live">🟢 Live</p>;
+
   if (time <= 0) return <p>Ended</p>;
 
   const seconds = Math.floor(time / 1000);

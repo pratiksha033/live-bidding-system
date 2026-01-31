@@ -7,9 +7,5 @@ exports.getItems = (req, res) => {
     count: items.length,
   });
 
-  // ✅ return serverTime + items
-  res.json({
-    serverTime: Date.now(),
-    items,
-  });
+  res.json(items);
 };
